@@ -1,0 +1,18 @@
+Doc ID 2191678.1
+Validating system setup.
+    Node registry is valid.
+    [ERROR]     ETCC not run in the database node fmloblebsdb01
+                The EBS Technology Codelevel Checker needs to be run on the database node.
+                It is available as Patch 17537119.
+
+1. Backup applsys.txk_tcc_results table.
+
+2. Update table using the SQL statement below.
+
+create backup applsys.txk_tcc_results_bak as select * from applsys.txk_tcc_results;
+UPDATE applsys.txk_tcc_results SET node_name ='fmloblebsdb01' 
+where node_name ='fmloblebsdb01.afsfmlob.local';
+
+ 3. Run ADOP again to validate it fixes the issue.
+
+select node_name from applsys.txk_tcc_results
