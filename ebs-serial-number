@@ -1,0 +1,1 @@
+SELECT node_name,extractValue(XMLType(TEXT),'//oa_context_serial') SERIAL_NUMBER, extractValue(XMLType(TEXT),'//file_edition_type') FILE_EDITION from fnd_oam_context_files where name not in ('TEMPLATE','METADATA') and (status !='H') and (CTX_TYPE !='D') ;
