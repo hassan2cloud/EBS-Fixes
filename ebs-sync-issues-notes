@@ -1,0 +1,45 @@
+How to Synchronize the AD tables FND_NODES, 
+ADOP_VALID_NODES, and FND_OAM_CONTEXT_FILES in 
+12.2 when adop fails. (Doc ID 2064223.1)
+
+Error "Number of servers are not in sync 
+between Run and Patch Context" While fs_clone of patching
+ (WLS 17495356) Cycle (Doc ID 1634239.1)
+
+12.2 E-Business Suite Applications DBA Online ADOP Utility Fs_clone Fails With 
+"ERROR: Number of servers are not in sync between Run and Patch Context" (Doc ID 1582473.1)
+
+
+
+
+
+$ADJVAPRG oracle.apps.ad.autoconfig.oam.CtxSynchronizer \
+action=upload \
+contextfile=<full path to patch context file> \
+logfile=/tmp/patchctxupload.log
+
+
+
+SELECT  extractValue(XMLType(TEXT),'//host[@oa_var="s_hostname"]'),
+extractValue(XMLType(TEXT),'//oacore_server_ports'),
+extractValue(XMLType(TEXT),'//forms_server_ports'),
+extractValue(XMLType(TEXT),'//oafm_server_ports'),
+extractValue(XMLType(TEXT),'//forms-c4ws_server_ports'),
+extractValue(XMLType(TEXT),'//oaea_server_ports')
+from fnd_oam_context_files
+where name not in ('TEMPLATE','METADATA')
+and (status is null or status !='H')
+and EXTRACTVALUE(XMLType(TEXT),'//file_edition_type')='run'
+and CTX_TYPE = 'A'
+union all
+SELECT  extractValue(XMLType(TEXT),'//host[@oa_var="s_hostname"]'),
+extractValue(XMLType(TEXT),'//oacore_server_ports'),
+extractValue(XMLType(TEXT),'//forms_server_ports'),
+extractValue(XMLType(TEXT),'//oafm_server_ports'),
+extractValue(XMLType(TEXT),'//forms-c4ws_server_ports'),
+extractValue(XMLType(TEXT),'//oaea_server_ports')
+from fnd_oam_context_files
+where name not in ('TEMPLATE','METADATA')
+and (status is null or status !='H')
+and EXTRACTVALUE(XMLType(TEXT),'//file_edition_type')='patch'
+and CTX_TYPE = 'A';
