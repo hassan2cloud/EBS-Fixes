@@ -1,0 +1,13 @@
+2628196.1
+Cause:
+It was determined that the RUN WLS Admin services were modified.
+What modifications were made is not important.
+
+The issue is that on source when adpreclone.pl appsTier was run the
+$COMMON_TOP/adopclone_/FMW/WLS/plan/moveplan.xml was not updated to match the $FMW_HOME/config.xml file
+
+Then when adcfgclone attempts to valid OHS home it fails.
+
+Solution:
+Delete the $COMMON_TOP/adopclone_<hostname> directory on source and run adpreclone.pl appsTier to make the directory fresh again.
+##################################################################
