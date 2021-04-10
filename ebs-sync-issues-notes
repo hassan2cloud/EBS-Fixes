@@ -43,3 +43,59 @@ where name not in ('TEMPLATE','METADATA')
 and (status is null or status !='H')
 and EXTRACTVALUE(XMLType(TEXT),'//file_edition_type')='patch'
 and CTX_TYPE = 'A';
+--------------
+set lines 200
+col hostname for a15
+col oacore_node for a15
+col oacore for a20
+col forms for a20
+col c4ws for a23
+col oaea for a20
+col oafm for a20
+col ons_local for a5
+col ons_remote for a5
+col web for a5
+col web_ssl for a5
+col http for a5
+col https for a5
+col edition for a5
+
+SELECT  EXTRACTVALUE(XMLType(TEXT),'//file_edition_type') edition, extractValue(XMLType(TEXT),'//host[@oa_var="s_hostname"]') hostname,
+extractValue(XMLType(TEXT),'//oacore_nodes') oacore_node,
+extractValue(XMLType(TEXT),'//oacore_server_ports') oacore,
+extractValue(XMLType(TEXT),'//forms_server_ports') forms,
+extractValue(XMLType(TEXT),'//oafm_server_ports') oafm,
+extractValue(XMLType(TEXT),'//forms-c4ws_server_ports') c4ws,
+extractValue(XMLType(TEXT),'//oaea_server_ports') oaea,
+extractValue(XMLType(TEXT),'//ons_localport') ons_local,
+extractValue(XMLType(TEXT),'//ons_remoteport') ons_remote,
+extractValue(XMLType(TEXT),'//activewebport') web,
+extractValue(XMLType(TEXT),'//web_ssl_port') web_ssl,
+extractValue(XMLType(TEXT),'//httplistenparameter') http,
+extractValue(XMLType(TEXT),'//httpslistenparameter') https
+from applsys.fnd_oam_context_files
+where name not in ('TEMPLATE','METADATA')
+and (status is null or status !='H')
+and EXTRACTVALUE(XMLType(TEXT),'//file_edition_type')='run'
+and CTX_TYPE = 'A'
+union all
+SELECT EXTRACTVALUE(XMLType(TEXT),'//file_edition_type') edition,  extractValue(XMLType(TEXT),'//host[@oa_var="s_hostname"]'),
+extractValue(XMLType(TEXT),'//oacore_nodes') oacore_node,
+extractValue(XMLType(TEXT),'//oacore_server_ports'),
+extractValue(XMLType(TEXT),'//forms_server_ports'),
+extractValue(XMLType(TEXT),'//oafm_server_ports'),
+extractValue(XMLType(TEXT),'//forms-c4ws_server_ports'),
+extractValue(XMLType(TEXT),'//oaea_server_ports'),
+extractValue(XMLType(TEXT),'//ons_localport'),
+extractValue(XMLType(TEXT),'//ons_remoteport'),
+extractValue(XMLType(TEXT),'//activewebport'),
+extractValue(XMLType(TEXT),'//web_ssl_port'),
+extractValue(XMLType(TEXT),'//httplistenparameter'),
+extractValue(XMLType(TEXT),'//httpslistenparameter')
+from applsys.fnd_oam_context_files
+where name not in ('TEMPLATE','METADATA')
+and (status is null or status !='H')
+and EXTRACTVALUE(XMLType(TEXT),'//file_edition_type')='patch'
+and CTX_TYPE = 'A'
+order by 1 desc, 2 ;
+
