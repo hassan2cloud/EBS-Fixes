@@ -1,0 +1,80 @@
+ERROR: RC-50410: Fatal: OUI Registration failed with an Abnormal Termination 
+error during call from ouicli.pl. Please check the 
+log file /intebs02/oracle/applebs_12/fs2/inst/apps/INTEBS_intnsflebsmt01/admin/log/ohclone.log for more details.
+Raised by oracle.apps.ad.clone.ApplyAppsTechStack
+	
+ANALYSIS
+-------------
+Based on the information you have provided I am believing you are this error because the 
+10.1.2 was either incorrectly attached or deatacched at some point causing some sort of inventory corruption.
+
+ACTION PLAN
+--------------
+Please do the following to detach/re-attach the 10.1.2 OH/
+
+1. Source the patch file system. I am asking to source patch because the error points to fs2 and I am assuming fs2 is your patch filesystem, if it is run instead, then source RUN.
+
+# Check $ORACLE_HOME points to the same points to /ebs01/oracle/FMLOBEBS_12/fs2/EBSapps/10.1.2/
+
+2. Check your inventory.xml. You should have something like the following:
+
+3. Detach home:
+
+$FMW_HOME/oracle_common/oui/bin/runInstaller -detachhome ORACLE_HOME=$ORACLE_HOME
+
+4. Check inventory.xml shows the entry form fs2/EBSapps/10.1.2 as REMOVED
+
+5. Re-attach the OH
+
+cd $ORACLE_HOME/oui/bin
+./attachHome.sh
+
+6. Check inventory.xml. The word REMOVED should have been removed.
+
+7. Run fs_clone with the force=yes option and update with results.
+
+$ adop phase=fs_clone force=yes
+
+
+
+ERROR: RC-50410: Fatal: OUI Registration failed with an Abnormal Termination 
+error during call from ouicli.pl. Please check the 
+log file /intebs02/oracle/applebs_12/fs2/inst/apps/INTEBS_intnsflebsmt01/admin/log/ohclone.log for more details.
+Raised by oracle.apps.ad.clone.ApplyAppsTechStack
+
+WARNING: RC-50208: Warning: Exception  in method deepOUICheck
+
+instantiate file:
+-----------
+
+FS_CLONE failing with error FUNCTION: main::instantiateFile [ Level 1 ] (Doc ID 2656509.1)
+
+
+$COMMON_TOP/adopclone_/FMW/WLS/plan/moveplan.xml $FMW_HOME/config.xml file
+
+$ adop phase=cleanup cleanup_mode=full
+
+$ adop phase=fs_clone force=yes
+
+cp  /intebs02/oracle/applebs_12/fs1/EBSapps/appl/INTEBS_intnsflebsmt01.env /intebs02/oracle/applebs_12/fs2/EBSapps/appl/INTEBS_intnsflebsmt01.env
+/intebs02/oracle/applebs_12/fs1/EBSapps/appl/APPSINTEBS_intnsflebsmt01.env /intebs02/oracle/applebs_12/fs2/EBSapps/appl/APPSINTEBS_intnsflebsmt01.env 
+
+12.2 E-Business Suite Applications DBA Online Patching ADOP Utility 
+Phase=fs_clone Fails With Error './attachHome.sh: line 6: 25494 Aborted' 
+And Fs2 Is Wiped Out (Doc ID 2538884.1)
+
+exec /tmp permission check permissions on tmp
+-Djava.io.tmpdir=tmpdirpath 
+
+run adpreclone.pl again
+attach again
+replace adpreclone.bak
+
+
+
+
+<HOME NAME="OH718421812" LOC="/intebs02/oracle/applebs_12/fs2/FMW_Home/Oracle_EBS-app1" TYPE="O" IDX="8" REMOVED="T"/>
+<HOME NAME="OH415628962" LOC="/intebs02/oracle/applebs_12/fs2/FMW_Home/webtier" TYPE="O" IDX="7" REMOVED="T"/>
+<HOME NAME="OH983501368" LOC="/intebs02/oracle/applebs_12/fs2/FMW_Home/oracle_common" TYPE="O" IDX="6" REMOVED="T"/>
+<HOME NAME="OH1345336224" LOC="/intebs02/oracle/applebs_12/fs2/FMW_Home/Oracle_OAMWebGate1" TYPE="O" IDX="9" REMOVED="T"/>
+<HOME NAME="INTEBS_TOOLS__intebs02_oracle_applebs_12_fs2_EBSapps_10_1_2" LOC="/intebs02/oracle/applebs_12/fs2/EBSapps/10.1.2" TYPE="O" IDX="10" REMOVED="T"/>
