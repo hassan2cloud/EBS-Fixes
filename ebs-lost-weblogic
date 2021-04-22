@@ -1,1 +1,5 @@
 1949675.1
+$EBS_DOMAIN_HOME/security/DefaultAuthenticatorInit.ldift
+$EBS_DOMAIN_HOME/servers/<server_name>/data/ldap
+$EBS_DOMAIN_HOME/servers/<server_name>/security/boot.properties
+$EBS_DOMAIN_HOME/servers/<server_name>/data/nodemanager/boot.properties
