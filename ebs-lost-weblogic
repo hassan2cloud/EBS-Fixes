@@ -29,3 +29,7 @@ Save and activate the changes.
 The first time, AdminServer has to be stopped from the Admin console. Follow these steps:
 Log in to the WebLogic Administration console.
 Shut down AdminServer.
+
+
+Source the application tier environment file.
+$ADMIN_SCRIPTS_HOME/adadminsrvctl.sh start
