@@ -3,3 +3,15 @@ $EBS_DOMAIN_HOME/security/DefaultAuthenticatorInit.ldift
 $EBS_DOMAIN_HOME/servers/<server_name>/data/ldap
 $EBS_DOMAIN_HOME/servers/<server_name>/security/boot.properties
 $EBS_DOMAIN_HOME/servers/<server_name>/data/nodemanager/boot.properties
+
+
+Start a new session and connect to the Oracle E-Business Suite instance.
+Do not source the application tier environment file.
+Run the following command to source the WebLogic Server domain environment:
+
+$ cd $EBS_DOMAIN_HOME/bin
+$ source setDomainEnv.sh
+Run the following commands:
+Next
+cd $EBS_DOMAIN_HOME/security
+$ java weblogic.security.utils.AdminAccount weblogic xxxxxx .
