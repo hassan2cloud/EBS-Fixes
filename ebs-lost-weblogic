@@ -15,3 +15,17 @@ Run the following commands:
 Next
 cd $EBS_DOMAIN_HOME/security
 $ java weblogic.security.utils.AdminAccount weblogic xxxxxx .
+
+
+Log in to the WebLogic Administration console.
+
+Click the 'Lock & Edit' button.
+In the left panel, click on the EBS Domain link.
+Select the 'Security' tab.
+Click on the 'Advanced' link.
+Edit the 'Node Manager password' field and set it to the new WebLogic Server password. The password should be same as set in Step 3.
+Edit the 'Confirm Node Manager Password' field and set it to the new WebLogic Server password. The password should be same as set in Step 3.
+Save and activate the changes.
+The first time, AdminServer has to be stopped from the Admin console. Follow these steps:
+Log in to the WebLogic Administration console.
+Shut down AdminServer.
