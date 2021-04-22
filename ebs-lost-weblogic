@@ -33,3 +33,9 @@ Shut down AdminServer.
 
 Source the application tier environment file.
 $ADMIN_SCRIPTS_HOME/adadminsrvctl.sh start
+
+
+Start the Managed Servers.
+ For the first time, all Managed Servers should be started from the 
+WebLogic Server Admin console. This step will create boot.properties 
+files for the respective Managed Servers.
