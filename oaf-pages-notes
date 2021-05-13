@@ -1,0 +1,35 @@
+1. Run Adadmin
+2. Select Generate Applications Files menu
+3. Select Generate product JAR files (use FORCE)
+
+
+RELOAD THE JAR/ZIP FILES INTO THE DATABASE
+------------------------------------------------------------
+1. Run Adadmin
+2. Select Compile/Reload Applications Database Entities menu
+3. Select Reload JAR files to database
+
+
+RECOMPILE THE LOADED JAVA CLASSES
+----------------------------------------------------
+1. Run Adadmin
+2. Select Compile/Reload Applications Database Entities menu
+3. Select Compile APPS schema
+
+RECOMPILE JSPs
+------------------------
+1) Stop services.
+2) backup and then delete the files under
+
+$OA_HTML/cabo/images/cache
+$OA_HTML/cabo/styles/cache
+
+3) Recompile Jsps
+./ojspCompile.pl --compile --flush -p 2
+
+4) Start services
+
+5) Clear the app & browser cache
+How To Clear Caches (Apache/iAS, Cabo, Modplsql, Browser, Jinitiator, Java, Portal, WebADI) for E-Business Suite? ( Doc ID 742107.1 )
+
+6) Retest
