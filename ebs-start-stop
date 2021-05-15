@@ -1,7 +1,7 @@
 cd $ADMIN_SCRIPTS_HOME
-{ echo apps/$apps_pw; echo $sys_pw; echo $web_pw; } | sh adstrtal.sh
+{ echo apps/$apps_pw; echo $web_pw; } | sh adstrtal.sh
 
 
 cd $ADMIN_SCRIPTS_HOME
-{ echo apps/$apps_pw; echo $sys_pw; echo $web_pw; } | sh adstpall.sh
+{ echo apps/$apps_pw; echo $web_pw; } | sh adstpall.sh
 ~
