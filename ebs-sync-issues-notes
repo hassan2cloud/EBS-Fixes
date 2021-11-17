@@ -2,6 +2,8 @@ How to Synchronize the AD tables FND_NODES,
 ADOP_VALID_NODES, and FND_OAM_CONTEXT_FILES in 
 12.2 when adop fails. (Doc ID 2064223.1)
 
+Update weblogic port note 2563486.1
+
 OHS config sync 1905593.1
 perl <AD_TOP>/bin/adRegisterWLSListeners.pl contextfile=<CONTEXT_FILE>
 perl <AD_TOP>/bin/adSyncContext.pl contextfile=<CONTEXT_FILE>
