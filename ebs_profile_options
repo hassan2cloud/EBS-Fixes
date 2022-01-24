@@ -1,0 +1,30 @@
+select p.profile_option_name SHORT_NAME, n.user_profile_option_name "PROFILE NAME",
+decode(v.level_id, 10001, 'Site', 10002, 'Application',
+10003, 'Responsibility', 10004, 'User', 10005, 'Server',
+10007, 'SERVRESP', 'UnDef') LEVEL_SET,
+decode(to_char(v.level_id), '10001', '',
+'10002', app.application_short_name, '10003', rsp.responsibility_key,
+'10005', svr.node_name, '10006', org.name, '10004', usr.user_name,
+'10007', 'Serv/resp', 'UnDef') "CONTEXT", v.profile_option_value VALUE, v.LAST_UPDATE_DATE
+from fnd_profile_options p,
+fnd_profile_option_values v,
+fnd_profile_options_tl n,
+fnd_user usr,
+fnd_application app,
+fnd_responsibility rsp,
+fnd_nodes svr,
+hr_operating_units org
+where p.profile_option_id = v.profile_option_id (+)
+and p.profile_option_name = n.profile_option_name
+and n.profile_option_name like '%SITE%'
+--and upper(n.user_profile_option_name) like upper('BNE%')
+--and trunc(v.LAST_UPDATE_DATE) > trunc(sysdate-170)
+and usr.user_id (+) = v.level_value
+and rsp.application_id (+) = v.level_value_application_id
+and rsp.responsibility_id (+) = v.level_value
+and app.application_id (+) = v.level_value
+and svr.node_id (+) = v.level_value
+and org.organization_id (+) = v.level_value
+and v.LAST_UPDATE_DATE is not null
+order by last_update_date desc, short_name, level_set
+/
